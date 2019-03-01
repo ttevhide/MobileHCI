@@ -29,7 +29,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/cyclist" />
+        android:src="@drawable/cycle" />
 
     <EditText
         android:id="@+id/username"
@@ -38,7 +38,8 @@
         android:layout_marginHorizontal="64dp"
         android:ems="10"
         android:hint="Username"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_marginTop="32dp"/>
 
     <EditText
         android:id="@+id/password"
@@ -55,7 +56,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorSigInButtonBlue"
         android:text="Sign In"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textColor="@color/colorWhite"
         android:textSize="18sp"
 
         android:textStyle="bold"
@@ -72,12 +73,14 @@
             android:id="@+id/textView3"
             android:layout_width="93dp"
             android:layout_height="39dp"
-            android:text="No account?" />
+            android:text="No account?"
+            android:textColor="@color/colorBlack"/>
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="96dp"
             android:layout_height="33dp"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:textColor="@color/colorBlack"/>
     </LinearLayout>
 </LinearLayout>
