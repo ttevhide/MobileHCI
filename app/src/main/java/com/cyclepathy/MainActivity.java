@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private CameraPosition mCameraPosition;
 
-    private FusedLocationProviderClient mFusedLocationroviderClient;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
 
     private final LatLng mDefaultLocation = new LatLng(55.864, -4.251);
     private static final int DEFAULT_ZOOM = 15;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mFusedLocationroviderClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void getDeviceLocation() {
         try {
             if (mLocationPermissionGranted) {
-                Task<Location> locationResult = mFusedLocationroviderClient.getLastLocation();
+                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
