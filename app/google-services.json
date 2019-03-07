@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "411756490574",
+    "firebase_url": "https://mobilehci-c41af.firebaseio.com",
+    "project_id": "mobilehci-c41af",
+    "storage_bucket": "mobilehci-c41af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411756490574:android:3ee73fc57c1ffdd0",
+        "android_client_info": {
+          "package_name": "com.cyclepathy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411756490574-o342uo02rn23ltjbhudm4f3nqpo7kmt4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cyclepathy",
+            "certificate_hash": "dbeee7443905cf8f0f38ba9e95b469552b268817"
+          }
+        },
+        {
+          "client_id": "411756490574-3gib7g8q7ij7ef878ut6mt9nflkirlqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-yqm3BlYx6N8ZZswnvPZ3EJLyhGx2ng0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411756490574-3gib7g8q7ij7ef878ut6mt9nflkirlqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
