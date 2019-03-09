@@ -1,33 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Members">
+    tools:context=".Login"
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="39dp"
+        android:gravity="center_horizontal"
+        android:text="CyclePathy"
+        android:textColor="@color/colorSigInButtonBlue"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <TextView
+        android:id="@+id/Events"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:text="MEMBERS"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="379dp"
+        android:layout_height="159dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/cycle" />
+
+    <TableLayout
+        android:layout_width="357dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dip"
+                android:text="Usernames"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="Points"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="3dip"
+                android:text="Winner: "
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="3dip"
+                android:text="Sridha"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:maxLines="10"
+                android:padding="3dip"
+                android:text="ttevhide \nsridha \ndominic \nalex \nsean"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:maxLines="10"
+                android:padding="3dip"
+                android:text="220 \n210 \n190 \n160 \n150 "
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:maxLines="10"
+                android:padding="3dip"
+                android:text="Points: "
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:maxLines="10"
+                android:padding="3dip"
+                android:text="300"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:layout_width="107dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:src="@drawable/cupa" />
+
+        </TableRow>
+
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent"
+            android:padding="3dip"
+            android:text="My Performance vs Average of Others"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
 
-    </android.support.design.widget.AppBarLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:src="@drawable/performance" />
 
-    <include layout="@layout/content_members" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+
+
+    </TableLayout>
+
+
+
+
+
+
+</LinearLayout>
