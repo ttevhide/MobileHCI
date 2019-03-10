@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    tools:context=".PersonProfile"
     android:orientation="vertical">
 
     <TextView
@@ -28,210 +28,141 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="259dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/cyclefamily" />
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:stretchColumns="1">
 
-        android:layout_width="fill_parent"
-        android:layout_height="365dp"
-        android:gravity="center"
-        android:stretchColumns="0,1,2">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-            android:background="#FFFFFF">
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-
-
-                android:background="#000000">
-
-
-            </TableRow>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:background="#000000"
-
-            >
-
-            <TextView
-                android:layout_width="189dp"
-                android:layout_height="match_parent"
-                android:layout_column="0"
-
-                android:background="#FFFFFF"
-                android:gravity="left"
-                android:text=" Username "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="235dp"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:background="#FFFFFF"
-
-                android:gravity="left"
-                android:text="Azra "
-                android:textAppearance="?android:attr/textAppearanceLarge"
-
-                />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-
-            android:layout_weight="1"
-            android:background="#000000">
+        <TableRow>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="0"
-
-                android:background="#FFFFFF"
-                android:gravity="left"
-                android:text=" Points Collected"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:padding="3dip"
+                android:text="Username"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-
-                android:background="#FFFFFF"
-                android:gravity="left"
-                android:text=" 130"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-
-            android:layout_weight="1"
-            android:background="#FFFFFF">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="0"
-
-                android:background="#FFFFFF"
-                android:gravity="left"
-                android:text=" My Events"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-
-                android:background="#FFFFFF"
                 android:gravity="center"
-                android:text=" "
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:padding="2dip"
+                android:text="Azra"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="2"
-
-                android:background="#FFFFFF"
-                android:gravity="left"
-                android:text=" "
-                android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="148dp"
-
-            android:layout_weight="1"
-            android:background="#FFFFF">
+        <TableRow>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_column="0"
+                android:padding="3dip"
+                android:text="Points Collected"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-                android:background="#FFFFFF"
-                android:gravity="left"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="2dip"
+                android:text="170"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:padding="2dip"
+                android:text="My Events"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="32dp"
+                android:gravity="start"
                 android:maxLines="10"
-                android:text=" Mosspark \n Pollok \n Springburn"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:padding="3dip"
+                android:text="Pollok \nMosspark \nBellahouston \nSpringburn \nArakan \nGovan"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".Login"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/followingButton"
-                    android:layout_width="143dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="64dp"
-                    android:layout_marginVertical="16dp"
-                    android:background="@color/colorSigInButtonBlue"
-                    android:text="Following"
-
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/followersButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="64dp"
-                    android:layout_marginVertical="16dp"
-                    android:background="@color/colorSigInButtonBlue"
-                    android:text="Followers"
-
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-                <Button
-                    android:id="@+id/messageButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="64dp"
-                    android:layout_marginVertical="16dp"
-                    android:background="@color/colorSigInButtonBlue"
-                    android:text="Message"
-
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:gravity="center"
+                android:maxLines="10"
+                android:padding="3dip"
+                android:text="3/3/2019 \n5/5/2019 \n5/5/2019 \n6/6/2019 \n7/7/2019 \n8/8/2019"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
         </TableRow>
-
 
     </TableLayout>
 
+    <LinearLayout
+        android:layout_width="390dp"
+        android:layout_height="226dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/FollowingButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/colorSigInButtonBlue"
+            android:text="Following"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/FollowersButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/colorSigInButtonBlue"
+            android:text="Followers"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/EditButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/colorSigInButtonBlue"
+            android:text="Message"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
 
 
-
-    --></LinearLayout>

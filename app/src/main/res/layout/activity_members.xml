@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    tools:context=".Members"
     android:orientation="vertical">
 
     <TextView
@@ -19,7 +19,7 @@
         android:layout_marginTop="16dp"/>
 
     <TextView
-        android:id="@+id/Events"
+        android:id="@+id/Members"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_horizontal"
@@ -126,7 +126,6 @@
 
         </TableRow>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -144,16 +143,6 @@
             android:cropToPadding="true"
             android:src="@drawable/performance" />
 
-
-
-
-
-
     </TableLayout>
-
-
-
-
-
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    tools:context=".AddEvent"
     android:orientation="vertical">
 
     <TextView
@@ -36,27 +36,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="64dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Place"
-        android:inputType="textPersonName"
-        android:layout_marginTop="16dp"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="64dp"
         android:ems="10"
         android:hint="Date"
-        android:inputType="textPassword"
-        android:layout_marginHorizontal="64dp"/>
+        android:inputType="text" />
     <EditText
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="64dp"
         android:ems="10"
         android:hint="Time"
-        android:inputType="textPassword"
-        android:layout_marginHorizontal="64dp"/>
+        android:inputType="text" />
 
     <Button
         android:id="@+id/addEventButton"
