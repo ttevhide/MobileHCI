@@ -239,9 +239,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         String sensor ="sensor=false";
         String mode = "mode=bicycling";
         String output = "json";
-        String key = "key=AIzaSyAFaWBxkWi3usKSs06NFK7aw0GqUfvzoC8";
+        String key = "key=AIzaSyBuaCEqjc-niccK_oR94Bw5nBlmUrFyhtE";
 
-        String parameters = str_origin+"&"+str_dest+"&"+sensor+"&"+mode+"&"+key;
+        String parameters = str_origin+"&"+str_dest+"&"+mode+"&"+key+"&"+sensor;
         String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
 
         return url;
@@ -344,6 +344,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
                     LatLng position = new LatLng(lat, lng);
+                    //System.out.println("Latitude: " + lat + ", Longitude: " + lng);
 
                     points.add(position);
                 }
@@ -353,7 +354,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 lineOptions.color(Color.RED);
             }
 
-            mMap.addPolyline(lineOptions);
+            try {
+                mMap.addPolyline(lineOptions);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
     }
 

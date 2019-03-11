@@ -103,11 +103,25 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(intent);
+                        onNewIntent(intent);
                     }
                 })
         .setNegativeButton("No", null)
         .show();
+    }
+
+    /**
+     * Delete activity to prevent users going back to map_route
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Bundle extras = intent.getExtras();
+        Intent finIntent = new Intent(this, MainActivity.class);
+        finIntent.putExtras(extras);
+        finIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(finIntent);
+        finish();
+        return;
     }
 
 }
