@@ -344,14 +344,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
                     LatLng position = new LatLng(lat, lng);
-                    //System.out.println("Latitude: " + lat + ", Longitude: " + lng);
+                    System.out.println("Latitude: " + lat + ", Longitude: " + lng);
 
                     points.add(position);
                 }
 
                 lineOptions.addAll(points);
-                lineOptions.width(2);
-                lineOptions.color(Color.RED);
+                lineOptions.width(20);
+                lineOptions.color(Color.BLUE);
             }
 
             try {
