@@ -10,4 +10,5 @@
     <string name="title_activity_person_profile">PersonProfile</string>
     <string name="start">START</string>
     <string name="stop">STOP</string>
+    <string name="enter_destination">Enter Destination</string>
 </resources>
