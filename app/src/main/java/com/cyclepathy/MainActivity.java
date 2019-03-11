@@ -1,6 +1,7 @@
 package com.cyclepathy;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
+    private boolean destinationSet = false;
 
     // Default Map Values
     private final LatLng mDefaultLocation = new LatLng(55.864, -4.251);
@@ -100,9 +104,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         updateLocationUI();
         getDeviceLocation();
 
+        final Context context = this;
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapClick(final LatLng latLng) {
+                if (destinationSet) {
+                    new AlertDialog.Builder(context)
+                            .setMessage("Change Route?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startDirections(latLng);
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                } else {
+                    startDirections(latLng);
+                }
+
+                /*
                 mMap.clear();
                 LatLng destination = latLng;
 
@@ -128,8 +150,38 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
                 markerPoints.clear();
+                */
+
             }
         });
+    }
+
+    private void startDirections(LatLng latLng) {
+        mMap.clear();
+        LatLng destination = latLng;
+
+        MarkerOptions options = new MarkerOptions();
+        options.position(latLng);
+        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+        mMap.addMarker(options);
+
+        ArrayList<LatLng> markerPoints = new ArrayList<>();
+        LatLng origin = null;
+        if (mLastKnownLocation != null) {
+            origin = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+            markerPoints.add(origin);
+        }
+        markerPoints.add(destination);
+
+        if (markerPoints.size() == 2) {
+            String url = getDirectionsURL(origin, destination);
+            System.out.println(url);
+            DownloadTask downloadTask = new DownloadTask();
+            downloadTask.execute(url);
+        }
+
+        markerPoints.clear();
     }
 
     private void getLocationPermission() {
@@ -209,11 +261,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     public void startRoute(View view) {
         final Intent intent = new Intent(this, MapRoute.class);
-        EditText editText = findViewById(R.id.editText3);
-        String destination = editText.getText().toString();
-        intent.putExtra(DESTINATION, destination);
 
-        if (destination.isEmpty() || destination == null) {
+        if (destinationSet) {
             new AlertDialog.Builder(this)
                     .setMessage("You have not entered a destination.\nAre you just going for a wonder around?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -331,6 +380,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
             MarkerOptions markerOptions = new MarkerOptions();
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
             for (int i = 0; i < result.size(); i ++) {
                 points = new ArrayList<LatLng>();
@@ -344,7 +394,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
                     LatLng position = new LatLng(lat, lng);
-                    System.out.println("Latitude: " + lat + ", Longitude: " + lng);
+                    builder.include(position);
 
                     points.add(position);
                 }
@@ -354,19 +404,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 lineOptions.color(Color.BLUE);
             }
 
+            int padding = 150;
+            LatLngBounds bounds = builder.build();
+            final CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
             try {
                 mMap.addPolyline(lineOptions);
+                mMap.animateCamera(cameraUpdate);
+                destinationSet = true;
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }
     }
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    */
 }
