@@ -1,16 +1,19 @@
 package com.cyclepathy;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,6 +27,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    public static final String DESTINATION = "com.cyclepathy.DESTINATION";
 
     // Activity and location information
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -167,7 +172,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void startRoute(View view) {
-        Intent intent = new Intent(this, MapRoute.class);
-        startActivity(intent);
+        final Intent intent = new Intent(this, MapRoute.class);
+        EditText editText = findViewById(R.id.editText3);
+        String destination = editText.getText().toString();
+        intent.putExtra(DESTINATION, destination);
+
+        if (destination.isEmpty() || destination == null) {
+            new AlertDialog.Builder(this)
+                    .setMessage("You have not entered a destination.\nAre you just going for a wonder around?")
+                    .setCancelable(true)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        } else startActivity(intent);
     }
 }

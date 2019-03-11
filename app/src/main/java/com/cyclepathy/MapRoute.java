@@ -73,7 +73,7 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit? This will cancel the route and you will earn no points.")
+                .setMessage("Are you sure you want to exit?\nThis will cancel the route and you will earn no points.")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
