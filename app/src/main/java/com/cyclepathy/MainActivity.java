@@ -15,9 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -31,6 +29,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,10 +58,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
     private boolean destinationSet = false;
+    private PolylineOptions route = null;
+    private CameraUpdate polyCameraUpdate = null;
 
     // Default Map Values
     private final LatLng mDefaultLocation = new LatLng(55.864, -4.251);
-    private static final int DEFAULT_ZOOM = 15;
+    private static final int DEFAULT_ZOOM = 13;
     private static final int PERMISSIONS_REQUEST_ACCESS_LOCATION = 1;
 
     // Save data
@@ -123,35 +124,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
                     startDirections(latLng);
                 }
+            }
+        });
 
-                /*
-                mMap.clear();
-                LatLng destination = latLng;
-
-                MarkerOptions options = new MarkerOptions();
-                options.position(latLng);
-                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-
-                mMap.addMarker(options);
-
-                ArrayList<LatLng> markerPoints = new ArrayList<>();
-                LatLng origin = null;
-                if (mLastKnownLocation != null) {
-                    origin = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
-                    markerPoints.add(origin);
-                }
-                markerPoints.add(destination);
-
-                if (markerPoints.size() == 2) {
-                    String url = getDirectionsURL(origin, destination);
-                    System.out.println(url);
-                    DownloadTask downloadTask = new DownloadTask();
-                    downloadTask.execute(url);
-                }
-
-                markerPoints.clear();
-                */
-
+        mMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
+            @Override
+            public void onPolylineClick(Polyline polyline) {
+                mMap.animateCamera(polyCameraUpdate);
             }
         });
     }
@@ -262,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void startRoute(View view) {
         final Intent intent = new Intent(this, MapRoute.class);
 
-        if (destinationSet) {
+        if (route != null) {
             new AlertDialog.Builder(this)
                     .setMessage("You have not entered a destination.\nAre you just going for a wonder around?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -402,16 +381,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 lineOptions.addAll(points);
                 lineOptions.width(20);
                 lineOptions.color(Color.BLUE);
+                lineOptions.clickable(true);
             }
 
             int padding = 150;
             LatLngBounds bounds = builder.build();
-            final CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+            polyCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
             try {
                 mMap.addPolyline(lineOptions);
-                mMap.animateCamera(cameraUpdate);
+                mMap.animateCamera(polyCameraUpdate);
                 destinationSet = true;
+                route = lineOptions;
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
