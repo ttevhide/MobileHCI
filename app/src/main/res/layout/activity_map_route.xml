@@ -64,6 +64,7 @@
         android:layout_marginBottom="16dp"
         android:background="@android:color/holo_red_dark"
         android:gravity="center"
+        android:onClick="stopRoute"
         android:text="@string/stop"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"

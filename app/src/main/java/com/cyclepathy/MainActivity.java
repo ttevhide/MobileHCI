@@ -180,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (destination.isEmpty() || destination == null) {
             new AlertDialog.Builder(this)
                     .setMessage("You have not entered a destination.\nAre you just going for a wonder around?")
-                    .setCancelable(true)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

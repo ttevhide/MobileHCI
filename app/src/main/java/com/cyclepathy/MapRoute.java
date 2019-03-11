@@ -1,6 +1,7 @@
 package com.cyclepathy;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
+
+    public  final static String TIME = "com.cyclepathy.TIME";
 
     // Initialize timer
     private TextView timerTextView;
@@ -67,6 +70,8 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
         // TODO polyline
     }
 
+
+
     /**
      * Stop user from accidentally exiting by pressing back
      */
@@ -74,7 +79,6 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to exit?\nThis will cancel the route and you will earn no points.")
-                .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -83,6 +87,27 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    /**
+     * Stop route
+     */
+    public void stopRoute(View view) {
+        final Intent intent = new Intent(this, MainActivity.class);
+        TextView textView = findViewById(R.id.textView);
+        String time = textView.getText().toString();
+        intent.putExtra(TIME, time);
+
+        new AlertDialog.Builder(this)
+                .setMessage("Finish cycle?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(intent);
+                    }
+                })
+        .setNegativeButton("No", null)
+        .show();
     }
 
 }
