@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class StartPage extends AppCompatActivity implements OnMapReadyCallback, Serializable {
+public class StartPage extends DrawerActivity implements OnMapReadyCallback, Serializable {
 
     public static final String ROUTE = "com.cyclepathy.ROUTE";
     public static final String ORIGIN = "com.cyclepathy.ORIGIN";

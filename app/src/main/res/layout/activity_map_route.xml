@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/fab"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -30,12 +30,6 @@
         layout="@layout/content_map_route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
@@ -82,7 +76,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textColor="@android:color/black"
         android:textSize="36sp"
         android:textStyle="bold"
