@@ -126,29 +126,34 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
         mMap = map;
         getLocationPermission();
         updateLocationUI();
-        getDeviceLocation();
+        getDeviceLocation(false);
 
-        // Get and show route
-        Intent intent = getIntent();
-        PolylineOptions route = intent.getParcelableExtra(MainActivity.ROUTE);
-        mMap.addPolyline(route);
+        try {
+            // Get and show route
+            Intent intent = getIntent();
+            PolylineOptions route = intent.getParcelableExtra(MainActivity.ROUTE);
+            mMap.addPolyline(route);
 
-        // Get and show destination
-        LatLng destination = intent.getExtras().getParcelable(MainActivity.DESTINATION);
-        MarkerOptions options = new MarkerOptions();
-        options.position(destination);
-        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mMap.addMarker(options);
+            // Get and show destination
+            LatLng destination = intent.getExtras().getParcelable(MainActivity.DESTINATION);
+            MarkerOptions options = new MarkerOptions();
+            options.position(destination);
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            mMap.addMarker(options);
 
-        // Update camera
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (LatLng point : route.getPoints()) {
-            builder.include(point);
+            // Update camera
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (LatLng point : route.getPoints()) {
+                builder.include(point);
+            }
+            LatLngBounds bounds = builder.build();
+            int padding = 150;
+            polyCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+            mMap.animateCamera(polyCameraUpdate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            getDeviceLocation(true);
         }
-        LatLngBounds bounds = builder.build();
-        int padding = 150;
-        polyCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        mMap.animateCamera(polyCameraUpdate);
     }
 
 
@@ -251,7 +256,7 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
-    private void getDeviceLocation() {
+    private void getDeviceLocation(final boolean moveCamera) {
         try {
             if (mLocationPermissionGranted) {
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
@@ -260,16 +265,17 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
                             mLastKnownLocation = task.getResult();
-                            /*
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()),
-                                    DEFAULT_ZOOM
-                            ));
-                            */
+                            if (moveCamera) {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()),
+                                        DEFAULT_ZOOM
+                                ));
+                            }
                         } else {
                             Log.d(TAG, "Current location  is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
-                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                            if (moveCamera)
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                         }
                     }
                 });
