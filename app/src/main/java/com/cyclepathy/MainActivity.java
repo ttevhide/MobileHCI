@@ -40,14 +40,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, Serializable {
 
+    public static final String ROUTE = "com.cyclepathy.ROUTE";
+    public static final String ORIGIN = "com.cyclepathy.ORIGIN";
     public static final String DESTINATION = "com.cyclepathy.DESTINATION";
 
     // Activity and location information
@@ -57,9 +60,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
-    private boolean destinationSet = false;
     private PolylineOptions route = null;
     private CameraUpdate polyCameraUpdate = null;
+    private LatLng origin = null;
+    private LatLng destination = null;
 
     // Default Map Values
     private final LatLng mDefaultLocation = new LatLng(55.864, -4.251);
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(final LatLng latLng) {
-                if (destinationSet) {
+                if (route != null) {
                     new AlertDialog.Builder(context)
                             .setMessage("Change Route?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -137,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void startDirections(LatLng latLng) {
         mMap.clear();
-        LatLng destination = latLng;
+        LatLng end = latLng;
 
         MarkerOptions options = new MarkerOptions();
         options.position(latLng);
@@ -146,18 +150,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(options);
 
         ArrayList<LatLng> markerPoints = new ArrayList<>();
-        LatLng origin = null;
+        LatLng start = null;
         if (mLastKnownLocation != null) {
-            origin = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
-            markerPoints.add(origin);
+            start = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+            markerPoints.add(start);
         }
-        markerPoints.add(destination);
+        markerPoints.add(end);
 
         if (markerPoints.size() == 2) {
-            String url = getDirectionsURL(origin, destination);
+            String url = getDirectionsURL(start, end);
             System.out.println(url);
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
+
+            origin = markerPoints.get(0);
+            destination = markerPoints.get(1);
         }
 
         markerPoints.clear();
@@ -240,8 +247,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     public void startRoute(View view) {
         final Intent intent = new Intent(this, MapRoute.class);
+        intent.putExtra(ROUTE, route);
+        intent.putExtra(ORIGIN, origin);
+        intent.putExtra(DESTINATION, destination);
 
-        if (route != null) {
+        if (route == null) {
             new AlertDialog.Builder(this)
                     .setMessage("You have not entered a destination.\nAre you just going for a wonder around?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -358,7 +368,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
             for (int i = 0; i < result.size(); i ++) {
@@ -373,6 +382,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
                     LatLng position = new LatLng(lat, lng);
+
                     builder.include(position);
 
                     points.add(position);
@@ -391,7 +401,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             try {
                 mMap.addPolyline(lineOptions);
                 mMap.animateCamera(polyCameraUpdate);
-                destinationSet = true;
                 route = lineOptions;
             } catch (NullPointerException e) {
                 e.printStackTrace();
