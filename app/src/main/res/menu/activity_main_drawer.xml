@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/start"
+            android:icon="@drawable/ic_directions_bike_black_24dp"
+            android:title="Start Route" />
+        <item
+            android:id="@+id/events"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="Events" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="MyProfile" />
+        <item
+            android:id="@+id/members"
+            android:icon="@drawable/ic_supervisor_account_black_24dp"
+            android:title="Members" />
+    </group>
+
+</menu>

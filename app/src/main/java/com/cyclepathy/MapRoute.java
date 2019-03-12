@@ -35,8 +35,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.util.List;
-
 public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = MapRoute.class.getSimpleName();
@@ -131,11 +129,11 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
         try {
             // Get and show route
             Intent intent = getIntent();
-            PolylineOptions route = intent.getParcelableExtra(MainActivity.ROUTE);
+            PolylineOptions route = intent.getParcelableExtra(StartPage.ROUTE);
             mMap.addPolyline(route);
 
             // Get and show destination
-            LatLng destination = intent.getExtras().getParcelable(MainActivity.DESTINATION);
+            LatLng destination = intent.getExtras().getParcelable(StartPage.DESTINATION);
             MarkerOptions options = new MarkerOptions();
             options.position(destination);
             options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
@@ -179,7 +177,7 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
      * Stop route
      */
     public void stopRoute(View view) {
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, StartPage.class);
         TextView textView = findViewById(R.id.textView);
         String time = textView.getText().toString();
         intent.putExtra(TIME, time);
@@ -202,7 +200,7 @@ public class MapRoute extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     protected void onNewIntent(Intent intent) {
         Bundle extras = intent.getExtras();
-        Intent finIntent = new Intent(this, MainActivity.class);
+        Intent finIntent = new Intent(this, StartPage.class);
         finIntent.putExtras(extras);
         finIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(finIntent);
