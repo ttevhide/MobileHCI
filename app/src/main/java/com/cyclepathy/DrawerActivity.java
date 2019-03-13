@@ -62,6 +62,9 @@ public abstract class DrawerActivity extends AppCompatActivity {
                             case R.id.members:
                                 intent = new Intent(context, Members.class);
                                 break;
+                            case R.id.login:
+                                intent = new Intent(context, Login.class);
+                                break;
                         }
 
                         menuItem.setChecked(true);

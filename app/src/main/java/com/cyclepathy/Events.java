@@ -11,7 +11,7 @@ import android.widget.Button;
 
 public class Events extends DrawerActivity {
 
-    Button addEvent;
+    Button addNewEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +20,8 @@ public class Events extends DrawerActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-     addEvent = (Button) findViewById(R.id.addEventButton);
-     addEvent.setOnClickListener(new View.OnClickListener(){
+     addNewEvent = (Button) findViewById(R.id.addNewEventButton);
+     addNewEvent.setOnClickListener(new View.OnClickListener(){
          @Override
          public void onClick(View view){
              startActivity(new Intent(getApplicationContext(),AddEvent.class));
