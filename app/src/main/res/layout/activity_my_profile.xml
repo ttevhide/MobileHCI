@@ -30,7 +30,6 @@
             android:gravity="center_horizontal"
             android:text="MY PROFILE"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
             android:layout_marginTop="8dp"/>
 
         <ImageView

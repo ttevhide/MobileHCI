@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Login extends DrawerActivity {
 
     Button login;
+    TextView signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,14 @@ public class Login extends DrawerActivity {
             @Override
             public void onClick(View view){
                 startActivity(new Intent(getApplicationContext(),MyProfile.class));
+            }
+        });
+
+        signup = (TextView) findViewById(R.id.signUp);
+        signup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(getApplicationContext(),SignUp.class));
             }
         });
 
