@@ -6,14 +6,172 @@
     android:layout_height="match_parent"
     tools:context=".MyProfile">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    </android.support.design.widget.AppBarLayout>
+
     <include layout="@layout/content_my_profile" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MyProfile"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:text="MY PROFILE"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <ImageView
+            android:layout_width="373dp"
+            android:layout_height="186dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/cyclist" />
+
+        <TableLayout
+            android:layout_width="309dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dip"
+                    android:text="Username"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="2dip"
+                    android:text="ttevhide"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="3dip"
+                    android:text="Points Collected"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="2dip"
+                    android:text="220"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:padding="2dip"
+                    android:text="My Events"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="32dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:padding="3dip"
+                    android:text="Pollok \nMosspark \nBellahouston \nSpringburn \nArakan \nGovan"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:maxLines="10"
+                    android:padding="3dip"
+                    android:text="3/3/2019 \n5/5/2019 \n5/5/2019 \n6/6/2019 \n7/7/2019 \n8/8/2019"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="384dp"
+            android:layout_height="218dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/FollowingButton"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
+                android:background="@color/colorSigInButtonBlue"
+                android:text="Following"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/FollowersButton"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
+                android:background="@color/colorSigInButtonBlue"
+                android:text="Followers"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/EditButton"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="8dp"
+                android:background="@color/colorSigInButtonBlue"
+                android:text="Edit"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
